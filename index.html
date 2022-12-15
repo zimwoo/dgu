@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <title>동국대 연행록 지도 2022.12.15.</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+        <style>
+            html, body, #mapid{
+                height: 100%;
+                margin: 0;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id = 'mapid'>
+        </div>
+        <script>
+            var map = L.map('mapid').setView([41.8055025,123.1563055],6);
+            var osm = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+                attribution:'&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> Contributors'
+            }).addTo(map);
+            var GoogleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{
+                maxZoom: 20,
+                subdomains:['mt0','mt1','mt2','mt3']
+            })
+            var GoogleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{
+                maxZoom: 20,
+                subdomains:['mt0','mt1','mt2','mt3']
+            })
+            var GoogleTerrain = L.tileLayer('http://{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}',{
+                maxZoom: 20,
+                subdomains:['mt0','mt1','mt2','mt3']
+            })
+            var GoogleHybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}',{
+                maxZoom: 20,
+                subdomains:['mt0','mt1','mt2','mt3']
+            })
+            var Stamen_Watercolor = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
+                attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                subdomains: 'abcd',
+                minZoom: 1,
+                maxZoom: 16,
+                ext: 'jpg'
+            });
+
+            var baseMaps = {
+                "GoogleStreetMap": GoogleStreets,
+                "GoogleSatelliteMap":GoogleSat,
+                "GoogleTerrain":GoogleTerrain,
+                "GoogleHybrid":GoogleHybrid,
+                "Watercolor":Stamen_Watercolor,
+                "OpenStreetMap":osm
+            };
+            
+            L.control.layers(baseMaps).addTo(map);
+  
+            var myIcon = L.Icon.extend({
+                options: {
+                shadowUrl: 'image/myicon_shadow.png',
+                iconSize:     [46, 62],
+                shadowSize:   [44, 22],
+                iconAnchor:   [23, 62],
+                shadowAnchor: [4, 22],
+                popupAnchor:  [0, -62]
+                }
+            });
+
+            var castleIcon = new myIcon({iconUrl: 'image/myicon_castle.png'}),
+                mountainIcon = new myIcon({iconUrl: 'image/myicon_mountain.png'}),
+                mountainroadIcon = new myIcon({iconUrl: 'image/myicon_mountainroad.png'}),
+                horseIcon = new myIcon({iconUrl: 'image/myicon_horse.png'});
+                buildingIcon = new myIcon({iconUrl: 'image/myicon_building.png'});
+                villageIcon = new myIcon({iconUrl: 'image/myicon_village.png'});
+
+                L.icon = function (options) {
+                    return new L.Icon(options);
+                };
+         
+            var part_1 = L.layerGroup();
+            var part_2 = L.layerGroup();
+            var part_3 = L.layerGroup();  
+            var part_4 = L.layerGroup();  
+            var part_5 = L.layerGroup();  
+            var part_6 = L.layerGroup();  
+            var part_7 = L.layerGroup();
+            var part_8 = L.layerGroup();    
+            
+            map.addLayer(part_1)
+            map.addLayer(part_2)
+            map.addLayer(part_3)
+            map.addLayer(part_4)
+            map.addLayer(part_5)
+            map.addLayer(part_6)
+            map.addLayer(part_7)
+            map.addLayer(part_8)
+
+            var overlays = {
+                "포구": part_1,
+                "사찰": part_2,
+                "고개": part_3,
+                "성시": part_4,
+                "산야": part_5,
+                "동리": part_6,
+                "역참": part_7,
+                "관문": part_8
+            };
+
+            var ctr_mapLayers = L.control.layers(null, overlays, {collapsed:false, position:'bottomleft'}).addTo(map);
+
+            var geodata =[{"type": "Feature", "properties": {"name": "건자포", "chiname": "乾子浦", "alias": "여온자개(餘溫者介);삼태자(三台子)", "type": "포구", "url": ""}, "geometry": {"type": "Point", "coordinates": [123.945364, 40.49731]}},
+{"type": "Feature", "properties": {"name": "계명사", "chiname": "鷄鳴寺", "alias": "", "type": "사찰", "url": ""}, "geometry": {"type": "Point", "coordinates": [123.379597, 41.02182]}},
+{"type": "Feature", "properties": {"name": "고가령", "chiname": "古家嶺", "alias": "", "type": "고개", "url": ""}, "geometry": {"type": "Point", "coordinates": [123.787786, 40.94287]}},
+{"type": "Feature", "properties": {"name": "구련성", "chiname": "九連城", "alias": "", "type": "성시", "url": "https://thekoreanews.com/detail.php?number=4768"}, "geometry": {"type": "Point", "coordinates": [124.4343914, 40.2032173]}},
+{"type": "Feature", "properties": {"name": "낭자산", "chiname": "狼子山", "alias": "", "type": "산야", "url": ""}, "geometry": {"type": "Point", "coordinates": [123.382955, 41.03067]}},
+{"type": "Feature", "properties": {"name": "마고령", "chiname": "麻姑嶺", "alias": "", "type": "고개", "url": ""}, "geometry": {"type": "Point", "coordinates": [123.970581, 40.52945]}},
+{"type": "Feature", "properties": {"name": "벽동리", "chiname": "甓洞里", "alias": "", "type": "동리", "url": ""}, "geometry": {"type": "Point", "coordinates": [123.697574, 40.96914]}},
+{"type": "Feature", "properties": {"name": "봉황산", "chiname": "鳳凰山", "alias": "", "type": "산야", "url": ""}, "geometry": {"type": "Point", "coordinates": [124.071555, 40.41316]}},
+{"type": "Feature", "properties": {"name": "봉황성", "chiname": "鳳凰城", "alias": "봉성(鳳城)", "type": "성시", "url": ""}, "geometry": {"type": "Point", "coordinates": [124.064453, 40.45648]}},
+{"type": "Feature", "properties": {"name": "분수령", "chiname": "分水嶺", "alias": "", "type": "고개", "url": ""}, "geometry": {"type": "Point", "coordinates": [123.845401, 40.91627]}},
+{"type": "Feature", "properties": {"name": "소석령", "chiname": "小石嶺", "alias": "석령(石嶺)", "type": "고개", "url": ""}, "geometry": {"type": "Point", "coordinates": [123.457461, 40.98743]}},
+{"type": "Feature", "properties": {"name": "송참", "chiname": "松站", "alias": "설리참(薛里站);설례참(薛禮站);진동보(鎭東堡)", "type": "역참", "url": ""}, "geometry": {"type": "Point", "coordinates": [123.980871, 40.58214]}},
+{"type": "Feature", "properties": {"name": "연산관", "chiname": "連山關", "alias": "", "type": "관문", "url": ""}, "geometry": {"type": "Point", "coordinates": [123.752153, 40.96279]}},
+{"type": "Feature", "properties": {"name": "책문", "chiname": "柵門", "alias": "", "type": "성시", "url": "https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=mongenlee&logNo=60145379514"}, "geometry": {"type": "Point", "coordinates": [124.08456791767, 40.3487138819684]}},
+{"type": "Feature", "properties": {"name": "첨수참", "chiname": "甛水站", "alias": "", "type": "역참", "url": ""}, "geometry": {"type": "Point", "coordinates": [123.559793, 40.98758]}},
+{"type": "Feature", "properties": {"name": "청석령", "chiname": "靑石嶺", "alias": "", "type": "고개", "url": ""}, "geometry": {"type": "Point", "coordinates": [123.510983, 41.02381]}},
+{"type": "Feature", "properties": {"name": "탑만촌", "chiname": "塔灣村", "alias": "", "type": "동리", "url": ""}, "geometry": {"type": "Point", "coordinates": [123.56072, 40.97177]}},
+{"type": "Feature", "properties": {"name": "통원보", "chiname": "通遠堡", "alias": "고진이보(古鎭夷堡)", "type": "성시", "url": ""}, "geometry": {"type": "Point", "coordinates": [123.921399, 40.79533]}},
+{"type": "Feature", "properties": {"name": "평정산", "chiname": "平頂山", "alias": "", "type": "산야", "url": ""}, "geometry": {"type": "Point", "coordinates": [123.908713, 40.82871]}},
+{"type": "Feature", "properties": {"name": "호랑곡", "chiname": "虎狼谷", "alias": "호랑동(虎狼洞)", "type": "동리", "url": ""}, "geometry": {"type": "Point", "coordinates": [123.502822, 40.96475]}},
+{"type": "Feature", "properties": {"name": "회녕령", "chiname": "會寧嶺", "alias": "마천령(磨天嶺)", "type": "고개", "url": ""}, "geometry": {"type": "Point", "coordinates": [123.648985, 40.97237]}},
+                ];
+   
+            L.geoJson(geodata, {
+                onEachFeature: function (feature, layer) {
+                            layer.bindPopup('<a href="' + feature.properties.url + '" target="_blank"><center><big><b>' + "[" + feature.properties.type + "]" +" " + feature.properties.name + '(' + feature.properties.chiname + ')'+'</b></big></a><br/>' + feature.properties.alias)},
+
+                pointToLayer: function(feature, latlng) { 
+                    switch (feature.properties.type) {
+                                case '포구': return L.marker(latlng, {icon: villageIcon}).addTo(part_1);
+                                case '사찰': return L.marker(latlng, {icon: buildingIcon}).addTo(part_2);
+                                case '고개': return L.marker(latlng, {icon: mountainroadIcon}).addTo(part_3);
+                                case '성시': return L.marker(latlng, {icon: castleIcon}).addTo(part_4);
+                                case '산야': return L.marker(latlng, {icon: mountainIcon}).addTo(part_5);
+                                case '동리': return L.marker(latlng, {icon: villageIcon}).addTo(part_6);
+                                case '역참': return L.marker(latlng, {icon: horseIcon}).addTo(part_7);
+                                case '관문': return L.marker(latlng, {icon: horseIcon}).addTo(part_8);
+                        }
+                    }
+                });
+
+	    </script> 
+    </body>
+</html>
+
